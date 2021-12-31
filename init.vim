@@ -23,6 +23,8 @@ set signcolumn=yes
 
 set completeopt=menu,menuone,noselect
 
+set pumheight=13
+
 call plug#begin('~/.vim/plugged')
 
 "Themes

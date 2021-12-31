@@ -29,8 +29,13 @@ require'nvim-treesitter.configs'.setup {
 	highlight = { enable = true },
 }
 
+local lspkind = require'lspkind'
+
 local cmp = require'cmp'
 cmp.setup({
+    formatting = {
+        format = lspkind.cmp_format({ with_text = true, maxwidth = 80 })
+    },
 	snippet = {
 		expand = function(args)
 			-- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
