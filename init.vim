@@ -1,27 +1,31 @@
-set nu rnu
-set nohlsearch
-set hidden
-"set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-"set expandtab
-set smartindent
-set nowrap
 set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
+set nohlsearch
+
+if !exists('g:vscode')
+
+let mapleader=";"
+
+set nu rnu
+set hidden
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nowrap
 set termguicolors
 set scrolloff=8
 set signcolumn=yes
 
-let mapleader=";"
+set completeopt=menu,menuone,noselect
 
 call plug#begin('~/.vim/plugged')
 
 "Themes
-"Plug 'joshdick/onedark.vim'
 Plug 'navarasu/onedark.nvim'
 
 "Lsp plugins
@@ -41,9 +45,6 @@ Plug 'Raimondi/delimitMate'
 "Debugger
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
-
-"Go dap
-"Plug 'leoluz/nvim-dap-go'
 
 Plug 'mbbill/undotree'
 
@@ -70,19 +71,16 @@ let g:onedark_diagnostics_undercurl = v:false
 syntax on
 colorscheme onedark
 
-"lua require('dap-go').setup()
-
 lua require("lsp-config")
 lua require("dap-config")
 
 lua << EOF
-require('telescope').setup({
-defaults = {
-	file_ignore_patterns = {
-		"node_modules",
-		".git"
-		},
-	}
+require'telescope'.setup({
+    pickers = {
+        find_files = {
+            hidden = true,
+        }
+    }
 })
 require'nvim-tree'.setup()
 require'lsp_signature'.setup()
@@ -97,9 +95,11 @@ nnoremap <leader>n :NvimTreeFindFile<CR>
 nnoremap <F3> :DiffviewOpen<CR>
 nnoremap <F4> :DiffviewClose<CR>
 
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
+
+endif
+
 " Move visually selected lines with J, K
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-nnoremap <Leader>+ :vertical resize +5<CR>
-nnoremap <Leader>- :vertical resize -5<CR>
