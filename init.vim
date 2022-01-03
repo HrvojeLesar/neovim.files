@@ -67,6 +67,9 @@ Plug 'sindrets/diffview.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 
+"Status line
+Plug 'NTBBloodbath/galaxyline.nvim' , {'branch': 'main'}
+
 call plug#end()
 
 let g:onedark_diagnostics_undercurl = v:false
@@ -75,8 +78,16 @@ colorscheme onedark
 
 lua require("lsp-config")
 lua require("dap-config")
+lua require("galaxyline-config")
 
 lua << EOF
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = true,
+})
+
 require'telescope'.setup({
     pickers = {
         find_files = {
