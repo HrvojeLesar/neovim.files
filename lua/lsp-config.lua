@@ -1,4 +1,11 @@
-local nvim_lsp = require('lspconfig')
+local lsp_status = require('lsp-status')
+lsp_status.config({ 
+    status_symbol = '',
+    diagnostics = false,
+    current_function = false,
+    update_interval = 500,
+})
+lsp_status.register_progress()
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -21,6 +28,8 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+    lsp_status.on_attach(client)
 end
 
 require 'nvim-treesitter.install'.compilers = { "clang" }
@@ -70,6 +79,8 @@ cmp.setup({
 })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+capabilities = vim.tbl_extend('keep', capabilities or {}, lsp_status.capabilities)
 
 local lsp_installer = require("nvim-lsp-installer")
 

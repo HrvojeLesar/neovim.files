@@ -69,6 +69,9 @@ Plug 'kyazdani42/nvim-tree.lua'
 
 "Status line
 Plug 'NTBBloodbath/galaxyline.nvim' , {'branch': 'main'}
+Plug 'nvim-lua/lsp-status.nvim'
+
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 call plug#end()
 
@@ -79,6 +82,7 @@ colorscheme onedark
 lua require("lsp-config")
 lua require("dap-config")
 lua require("galaxyline-config")
+lua require("indent-blankline-config")
 
 lua << EOF
 vim.diagnostic.config({

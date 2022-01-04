@@ -98,6 +98,17 @@ gls.left[11] = {
 }
 
 gls.right[1] = {
+    LspInfo = {
+        provider = function()
+            return require('lsp-status').status()
+        end,
+        separator = '',
+        separator_highlight = {'NONE',colors.bg},
+        highlight = {colors.fg,colors.bg},
+    },
+}
+
+gls.right[2] = {
     LineInfo = {
         provider = 'LineColumn',
         separator = '',
@@ -106,7 +117,7 @@ gls.right[1] = {
     },
 }
 
-gls.right[2] = {
+gls.right[3] = {
     PerCent = {
         provider = 'LinePercent',
         separator = ' ',
