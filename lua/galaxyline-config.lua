@@ -25,8 +25,12 @@ gls.left[1] = {
 gls.left[2] = {
     ViMode = {
         provider = function()
-            local alias = {n = 'NORMAL',i = 'INSERT',c= 'COMMAND',v= 'VISUAL',V= 'VISUAL LINE', [''] = 'VISUAL BLOCK'}
-            return alias[vim.fn.mode()] .. ' '
+            local alias = { n = 'NORMAL',i = 'INSERT',c = 'COMMAND',v = 'VISUAL',V = 'VISUAL LINE', [''] = 'VISUAL BLOCK', s = 'SELECT', R = 'REPLACE' }
+            if (alias[vim.fn.mode()] ~= nil) then
+                return alias[vim.fn.mode()] .. ' '
+            else
+                return vim.fn.mode()
+            end
         end,
         separator = ' ',
         separator_highlight = {'NONE', colors.bg },
