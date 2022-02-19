@@ -99,3 +99,21 @@ lsp_installer.on_server_ready(function(server)
     -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
     server:setup(opts)
 end)
+
+require'rust-tools'.setup({
+    tools = {
+        inlay_hints = {
+            -- prefix for parameter hints
+            parameter_hints_prefix = "<- ",
+
+            -- prefix for all the other hints (type, chaining)
+            other_hints_prefix = ">> ",
+        }
+    },
+    server = {
+
+        on_attach = on_attach,
+        capabilities = capabilities,
+    }
+})
+

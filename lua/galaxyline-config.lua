@@ -41,7 +41,7 @@ gls.left[2] = {
 gls.left[3] ={
     FileIcon = {
         provider = 'FileIcon',
-        condition = condition.buffer_not_empty,
+        -- condition = condition.buffer_not_empty,
         highlight = {require('galaxyline.providers.fileinfo').get_file_icon_color,colors.bg},
     },
 }
@@ -49,7 +49,7 @@ gls.left[3] ={
 gls.left[4] = {
     FileName = {
         provider = 'FileName',
-        condition = condition.buffer_not_empty,
+        -- condition = condition.buffer_not_empty,
         highlight = {colors.magenta,colors.bg,'bold'}
     }
 }

@@ -42,7 +42,7 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 "Parenthesis autocomplete
-Plug 'Raimondi/delimitMate'
+Plug 'windwp/nvim-autopairs'
 
 "Debugger
 Plug 'mfussenegger/nvim-dap'
@@ -73,18 +73,27 @@ Plug 'nvim-lua/lsp-status.nvim'
 
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+"Rust
+Plug 'simrat39/rust-tools.nvim'
+
 call plug#end()
 
-let g:onedark_diagnostics_undercurl = v:false
 syntax on
-colorscheme onedark
 
 lua require("lsp-config")
 lua require("dap-config")
 lua require("galaxyline-config")
 lua require("indent-blankline-config")
+lua require("nvim-tree-config")
 
 lua << EOF
+require'onedark'.setup({
+diagnostics = {
+    undercurl = false
+}
+})
+require'onedark'.load()
+
 vim.diagnostic.config({
     virtual_text = true,
     signs = true,
@@ -92,28 +101,25 @@ vim.diagnostic.config({
     update_in_insert = true,
 })
 
-require'telescope'.setup({
-    pickers = {
-        find_files = {
-            hidden = true,
-        }
-    }
-})
-require'nvim-tree'.setup()
+require'telescope'.setup()
 require'lsp_signature'.setup()
 require'gitsigns'.setup()
 require'diffview'.setup()
+require'nvim-autopairs'.setup()
 EOF
 
 nnoremap <F2> :UndotreeToggle<CR>
 nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <Leader>r :NvimTreeRefresh<CR>
+nnoremap <Leader>n :NvimTreeFindFile<CR>
 nnoremap <F3> :DiffviewOpen<CR>
 nnoremap <F4> :DiffviewClose<CR>
 
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
+
+nnoremap <Leader>j :bnext<CR>
+nnoremap <Leader>k :bprev<CR>
 
 endif
 
