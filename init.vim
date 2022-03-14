@@ -4,6 +4,11 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set nohlsearch
+set ignorecase
+
+if has('win32')
+    nmap <C-z> <Nop>
+endif
 
 if !exists('g:vscode')
 
@@ -76,6 +81,12 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 "Rust
 Plug 'simrat39/rust-tools.nvim'
 
+"Comments
+Plug 'numToStr/Comment.nvim'
+
+"Markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
 call plug#end()
 
 syntax on
@@ -102,10 +113,13 @@ vim.diagnostic.config({
 })
 
 require'telescope'.setup()
-require'lsp_signature'.setup()
+require'lsp_signature'.setup({
+hint_prefix = "",
+})
 require'gitsigns'.setup()
 require'diffview'.setup()
 require'nvim-autopairs'.setup()
+require'Comment'.setup()
 EOF
 
 nnoremap <F2> :UndotreeToggle<CR>
