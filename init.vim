@@ -5,6 +5,8 @@ set undofile
 set incsearch
 set nohlsearch
 set ignorecase
+"Capture mouse input from terminal
+set mouse=a
 
 if has('win32')
     nmap <C-z> <Nop>
