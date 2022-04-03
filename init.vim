@@ -15,6 +15,8 @@ endif
 if !exists('g:vscode')
 
 let mapleader=";"
+"Stops some dumb keybinds in .sql files
+let g:ftplugin_sql_omni_key = '<Leader>sql'
 
 set nu rnu
 set hidden
@@ -85,9 +87,11 @@ Plug 'simrat39/rust-tools.nvim'
 
 "Comments
 Plug 'numToStr/Comment.nvim'
+Plug 'folke/todo-comments.nvim'
 
 "Markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
 
 call plug#end()
 
@@ -120,8 +124,11 @@ hint_prefix = "",
 })
 require'gitsigns'.setup()
 require'diffview'.setup()
-require'nvim-autopairs'.setup()
+require'nvim-autopairs'.setup({
+    fast_wrap = {}
+})
 require'Comment'.setup()
+require'todo-comments'.setup()
 EOF
 
 nnoremap <F2> :UndotreeToggle<CR>
@@ -136,6 +143,8 @@ nnoremap <Leader>- :vertical resize -5<CR>
 
 nnoremap <Leader>j :bnext<CR>
 nnoremap <Leader>k :bprev<CR>
+
+inoremap <C-c> <esc>
 
 endif
 
