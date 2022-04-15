@@ -92,7 +92,6 @@ Plug 'folke/todo-comments.nvim'
 "Markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
-
 call plug#end()
 
 syntax on
@@ -133,7 +132,6 @@ EOF
 
 nnoremap <F2> :UndotreeToggle<CR>
 nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <Leader>r :NvimTreeRefresh<CR>
 nnoremap <Leader>n :NvimTreeFindFile<CR>
 nnoremap <F3> :DiffviewOpen<CR>
 nnoremap <F4> :DiffviewClose<CR>
