@@ -62,6 +62,7 @@ Plug 'mbbill/undotree'
 "Telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 "Snippets
 Plug 'L3MON4D3/LuaSnip'
@@ -117,7 +118,18 @@ vim.diagnostic.config({
     update_in_insert = true,
 })
 
-require'telescope'.setup()
+require'telescope'.setup({
+    extensions = {
+        ["ui-select"] = {
+            require'telescope.themes'.get_dropdown {
+
+                }
+            }
+        }
+    }
+)
+require'telescope'.load_extension("ui-select")
+
 require'lsp_signature'.setup({
 hint_prefix = "",
 })
