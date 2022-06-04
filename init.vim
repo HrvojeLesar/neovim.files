@@ -93,6 +93,9 @@ Plug 'folke/todo-comments.nvim'
 "Markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
+"Formatting
+Plug 'prettier/vim-prettier', { 'do': 'npm install --frozen-lockfile --production' }
+
 call plug#end()
 
 syntax on
