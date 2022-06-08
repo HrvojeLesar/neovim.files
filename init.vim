@@ -95,6 +95,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 "Formatting
 Plug 'prettier/vim-prettier', { 'do': 'npm install --frozen-lockfile --production' }
+nmap <Leader>a <Plug>(Prettier)
 
 call plug#end()
 
@@ -154,9 +155,6 @@ nnoremap <F4> :DiffviewClose<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 
-nnoremap <Leader>j :bnext<CR>
-nnoremap <Leader>k :bprev<CR>
-
 inoremap <C-c> <esc>
 
 endif
@@ -164,3 +162,8 @@ endif
 " Move visually selected lines with J, K
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+nnoremap <Leader>y "*y
+vnoremap <Leader>y "*y
+
+nnoremap <Leader>p "*p
