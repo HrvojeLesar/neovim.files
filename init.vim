@@ -95,6 +95,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 "Formatting
 Plug 'prettier/vim-prettier', { 'do': 'npm install --frozen-lockfile --production' }
+
+"Text highlight
+Plug 'RRethy/vim-illuminate'
+
 nmap <Leader>a <Plug>(Prettier)
 
 call plug#end()
