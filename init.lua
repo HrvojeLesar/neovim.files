@@ -6,6 +6,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("UserProfile") .. "/.nvim/undodir"
 vim.opt.undofile = true
 vim.opt.incsearch = true
+vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.mouse = "a"
 vim.opt.number = true

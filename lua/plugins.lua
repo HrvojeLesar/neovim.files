@@ -8,9 +8,15 @@ return require("packer").startup(function(use)
         "navarasu/onedark.nvim",
         config = function()
             local onedark = require("onedark")
+            local palette = require("onedark.palette")
             onedark.setup({
                 diagnostics = {
                     undercurl = false
+                },
+                highlights = {
+                    LspReferenceText = { bg = palette.dark.bg1 },
+                    LspReferenceWrite = { bg = palette.dark.bg1 },
+                    LspReferenceRead = { bg = palette.dark.bg1 },
                 }
             })
             onedark.load()
@@ -162,7 +168,7 @@ return require("packer").startup(function(use)
         "prettier/vim-prettier",
         run = "npm install --frozen-lockfile --production",
         config = function()
-            vim.keymap.set("n", "<Leader>a", ":Prettier<CR>", { })
+            vim.keymap.set("n", "<Leader>a", ":Prettier<CR>", {})
         end
     }
 
