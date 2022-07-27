@@ -31,7 +31,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
     -- illuminate lsp config
-    require ('illuminate').on_attach(client)
+    require('illuminate').on_attach(client)
 
     lsp_status.on_attach(client)
 end
@@ -97,7 +97,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lsp_installer = require('nvim-lsp-installer');
-lsp_installer.setup();
+lsp_installer.setup({});
 
 local opts = {
     on_attach = on_attach,
@@ -105,7 +105,26 @@ local opts = {
 }
 
 for _, server in ipairs(lsp_installer.get_installed_servers()) do
-    require('lspconfig')[server.name].setup(opts);
+    if server.name == 'sumneko_lua' then
+        require('lspconfig')[server.name].setup({
+            on_attach = opts.on_attach,
+            capabilities = opts.capabilities,
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        -- Get the language server to recognize the `vim` global
+                        globals = { 'vim' },
+                    },
+                    workspace = {
+                        -- Make the server aware of Neovim runtime files
+                        library = vim.api.nvim_get_runtime_file("", true),
+                    },
+                },
+            },
+        })
+    else
+        require('lspconfig')[server.name].setup(opts);
+    end
 end
 
 
