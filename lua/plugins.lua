@@ -126,7 +126,7 @@ return require("packer").startup(function(use)
 
     -- Status line
     use {
-        "NTBBloodbath/galaxyline.nvim",
+        "glepnir/galaxyline.nvim",
         config = function()
             require("galaxyline-config")
         end
