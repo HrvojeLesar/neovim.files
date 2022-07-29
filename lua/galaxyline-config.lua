@@ -1,6 +1,9 @@
 local gl = require("galaxyline")
 local condition = require("galaxyline.condition")
 
+local whitespace = require('galaxyline.provider_whitespace')
+Whitespace = whitespace.get_item
+
 local colors = require("onedark.palette").dark
 local gls = gl.section
 gl.short_line_list = {
@@ -105,7 +108,7 @@ gls.left[11] = {
 
 gls.left[12] = {
     Whitespace = {
-        provider = "Whitespace",
+        provider = Whitespace,
         highlight = { "NONE", colors.bg_d },
     }
 }
