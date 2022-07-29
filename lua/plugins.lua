@@ -1,7 +1,7 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require("packer").startup(function(use)
-    use 'wbthomason/packer.nvim'
+    use "wbthomason/packer.nvim"
 
     -- Themes
     use {
@@ -41,7 +41,7 @@ return require("packer").startup(function(use)
     -- Tree sitter
     use {
         "nvim-treesitter/nvim-treesitter",
-        run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+        run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
     }
 
     -- Parenthesis autocomplete
@@ -136,7 +136,7 @@ return require("packer").startup(function(use)
     use {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require('indent_blankline').setup()
+            require("indent_blankline").setup()
         end
     }
 
