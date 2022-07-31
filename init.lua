@@ -3,7 +3,6 @@ vim.g.ftplugin_sql_omni_key = "<Leader>sql"
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("UserProfile") .. "/.nvim/undodir"
 vim.opt.undofile = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
@@ -34,8 +33,11 @@ vim.diagnostic.config({
 })
 
 -- Windows doesn't support SIGTSTP
-if vim.fn.has("win32") then
+if vim.fn.has("win32") == 1 then
     vim.keymap.set("n", "<C-z>", "<Nop>", {})
+    vim.opt.undodir = os.getenv("UserProfile") .. "/.nvim/undodir"
+else
+    vim.opt.undodir = "~/.nvim/undodir"
 end
 
 -- stop vscode extension to try and start neovim plugins
