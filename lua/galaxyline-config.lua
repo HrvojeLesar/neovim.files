@@ -103,7 +103,7 @@ gls.left[11] = {
     }
 }
 
-gls.left[11] = {
+gls.left[12] = {
     Filler = {
         provider = {},
         highlight = { colors.dark_purple, colors.bg_d, "bold" },
