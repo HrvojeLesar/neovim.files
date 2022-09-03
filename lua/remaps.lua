@@ -10,3 +10,10 @@ vim.keymap.set("v", "<Leader>y", '"*y', {})
 
 vim.keymap.set("n", "<Leader>p", '"*p', {})
 vim.keymap.set("v", "<Leader>p", '"*p', {})
+
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {})
+if vim.fn.has("win32") == 1 then
+    vim.keymap.set("n", "<Leader>t", "<Cmd>tabe term://powershell<CR>", {})
+else
+    vim.keymap.set("n", "<Leader>t", "<Cmd>tabe term://bash<CR>", {})
+end
