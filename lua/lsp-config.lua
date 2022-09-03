@@ -25,8 +25,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>", opts)
     buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     buf_set_keymap("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-    -- buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-    buf_set_keymap("n", "<space>e", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+    buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
     buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
     buf_set_keymap("n", "<space>q", "<cmd>Telescope diagnostics<CR>", opts)
@@ -122,6 +121,26 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
                         library = vim.api.nvim_get_runtime_file("", true),
                     },
                 },
+            },
+        })
+    elseif server.name == "texlab" then
+        require("lspconfig")[server.name].setup({
+            on_attach = opts.on_attach,
+            capabilities = opts.capabilities,
+            settings = {
+                texlab = {
+                    build = {
+                        executable = "tectonic",
+                        args = {
+                            "-X",
+                            "compile",
+                            "%f",
+                            "--synctex",
+                            "--keep-logs",
+                            "--keep-intermediates"
+                        }
+                    }
+                }
             },
         })
     else
