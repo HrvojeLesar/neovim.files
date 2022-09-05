@@ -176,6 +176,13 @@ return require("packer").startup(function(use)
 
     -- Text highlight
     use "RRethy/vim-illuminate"
+    use {
+        "alvarosevilla95/luatab.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("luatab").setup()
+        end
+    }
 
     require("lsp-config")
     require("dap-config")
