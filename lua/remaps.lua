@@ -13,7 +13,9 @@ vim.keymap.set("v", "<Leader>p", '"*p', {})
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {})
 if vim.fn.has("win32") == 1 then
-    vim.keymap.set("n", "<Leader>t", "<Cmd>tabe term://powershell<CR>", {})
+    vim.keymap.set("n", "<Leader>tt", "<Cmd>split term://powershell<CR>", {})
+    vim.keymap.set("n", "<Leader>tv", "<Cmd>vertical split term://powershell<CR>", {})
 else
-    vim.keymap.set("n", "<Leader>t", "<Cmd>tabe term://bash<CR>", {})
+    vim.keymap.set("n", "<Leader>tt", "<Cmd>split term://bash<CR>", {})
+    vim.keymap.set("n", "<Leader>tv", "<Cmd>vertical split term://bash<CR>", {})
 end

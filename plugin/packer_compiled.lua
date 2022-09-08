@@ -263,62 +263,62 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: lsp_signature.nvim
-time([[Config for lsp_signature.nvim]], true)
-try_loadstring("\27LJ\2\nO\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\16hint_prefix\5\nsetup\18lsp_signature\frequire\0", "config", "lsp_signature.nvim")
-time([[Config for lsp_signature.nvim]], false)
--- Config for: diffview.nvim
-time([[Config for diffview.nvim]], true)
-try_loadstring("\27LJ\2\n¶\1\0\0\6\0\v\0\0226\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\3\0009\0\4\0009\0\5\0'\2\6\0'\3\a\0'\4\b\0004\5\0\0B\0\5\0016\0\3\0009\0\4\0009\0\5\0'\2\6\0'\3\t\0'\4\n\0004\5\0\0B\0\5\1K\0\1\0\23:DiffviewClose<CR>\t<F4>\22:DiffviewOpen<CR>\t<F3>\6n\bset\vkeymap\bvim\nsetup\rdiffview\frequire\0", "config", "diffview.nvim")
-time([[Config for diffview.nvim]], false)
--- Config for: vim-prettier
-time([[Config for vim-prettier]], true)
-try_loadstring("\27LJ\2\nT\0\0\6\0\6\0\t6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0004\5\0\0B\0\5\1K\0\1\0\18:Prettier<CR>\14<Leader>a\6n\bset\vkeymap\bvim\0", "config", "vim-prettier")
-time([[Config for vim-prettier]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\nU\0\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\2B\0\2\1K\0\1\0\14fast_wrap\1\0\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LJ\2\n0\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\21nvim-tree-config\frequire\0", "config", "nvim-tree.lua")
-time([[Config for nvim-tree.lua]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-try_loadstring("\27LJ\2\n$\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\15find_files#\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\14live_grep!\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\fbuffers#\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\14help_tags \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vresume3\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\30current_buffer_fuzzy_findù\3\1\0\t\0\27\1I6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\a\0005\4\5\0004\5\3\0006\6\0\0'\b\3\0B\6\2\0029\6\4\0064\b\0\0B\6\2\0?\6\0\0=\5\6\4=\4\b\3B\1\2\0019\1\t\0'\3\6\0B\1\2\0016\1\0\0'\3\n\0B\1\2\0026\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\15\0003\6\16\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\17\0003\6\18\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\19\0003\6\20\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\21\0003\6\22\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\23\0003\6\24\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\25\0003\6\26\0004\a\0\0B\2\5\0012\0\0€K\0\1\0\0\15<Leader>fi\0\14<Leader>r\0\15<Leader>fh\0\15<Leader>fb\0\15<Leader>fg\0\15<Leader>ff\6n\bset\vkeymap\bvim\22telescope.builtin\19load_extension\15extensions\1\0\0\14ui-select\1\0\0\15get_cursor\21telescope.themes\nsetup\14telescope\frequire\3€€À™\4\0", "config", "telescope.nvim")
-time([[Config for telescope.nvim]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: undotree
-time([[Config for undotree]], true)
-try_loadstring("\27LJ\2\nU\0\0\6\0\6\0\t6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0004\5\0\0B\0\5\1K\0\1\0\24:UndotreeToggle<CR>\t<F2>\6n\bset\vkeymap\bvim\0", "config", "undotree")
-time([[Config for undotree]], false)
 -- Config for: todo-comments.nvim
 time([[Config for todo-comments.nvim]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18todo-comments\frequire\0", "config", "todo-comments.nvim")
 time([[Config for todo-comments.nvim]], false)
--- Config for: galaxyline.nvim
-time([[Config for galaxyline.nvim]], true)
-try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22galaxyline-config\frequire\0", "config", "galaxyline.nvim")
-time([[Config for galaxyline.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+try_loadstring("\27LJ\2\n$\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\15find_files#\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\14live_grep!\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\fbuffers#\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\14help_tags \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vresume3\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\30current_buffer_fuzzy_findù\3\1\0\t\0\27\1I6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\a\0005\4\5\0004\5\3\0006\6\0\0'\b\3\0B\6\2\0029\6\4\0064\b\0\0B\6\2\0?\6\0\0=\5\6\4=\4\b\3B\1\2\0019\1\t\0'\3\6\0B\1\2\0016\1\0\0'\3\n\0B\1\2\0026\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\15\0003\6\16\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\17\0003\6\18\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\19\0003\6\20\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\21\0003\6\22\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\23\0003\6\24\0004\a\0\0B\2\5\0016\2\v\0009\2\f\0029\2\r\2'\4\14\0'\5\25\0003\6\26\0004\a\0\0B\2\5\0012\0\0€K\0\1\0\0\15<Leader>fi\0\14<Leader>r\0\15<Leader>fh\0\15<Leader>fb\0\15<Leader>fg\0\15<Leader>ff\6n\bset\vkeymap\bvim\22telescope.builtin\19load_extension\15extensions\1\0\0\14ui-select\1\0\0\15get_cursor\21telescope.themes\nsetup\14telescope\frequire\3€€À™\4\0", "config", "telescope.nvim")
+time([[Config for telescope.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\nU\0\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\2B\0\2\1K\0\1\0\14fast_wrap\1\0\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 -- Config for: luatab.nvim
 time([[Config for luatab.nvim]], true)
 try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vluatab\frequire\0", "config", "luatab.nvim")
 time([[Config for luatab.nvim]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
 -- Config for: onedark.nvim
 time([[Config for onedark.nvim]], true)
 try_loadstring("\27LJ\2\n¢\2\0\0\b\0\19\0\0316\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\2\0B\1\2\0029\2\3\0005\4\5\0005\5\4\0=\5\6\0045\5\v\0005\6\t\0009\a\a\0019\a\b\a=\a\n\6=\6\f\0055\6\r\0009\a\a\0019\a\b\a=\a\n\6=\6\14\0055\6\15\0009\a\a\0019\a\b\a=\a\n\6=\6\16\5=\5\17\4B\2\2\0019\2\18\0B\2\1\1K\0\1\0\tload\15highlights\21LspReferenceRead\1\0\0\22LspReferenceWrite\1\0\0\21LspReferenceText\1\0\0\abg\1\0\0\bbg1\tdark\16diagnostics\1\0\0\1\0\1\14undercurl\1\nsetup\20onedark.palette\fonedark\frequire\0", "config", "onedark.nvim")
 time([[Config for onedark.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
+-- Config for: undotree
+time([[Config for undotree]], true)
+try_loadstring("\27LJ\2\nU\0\0\6\0\6\0\t6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0004\5\0\0B\0\5\1K\0\1\0\24:UndotreeToggle<CR>\t<F2>\6n\bset\vkeymap\bvim\0", "config", "undotree")
+time([[Config for undotree]], false)
 -- Config for: indent-blankline.nvim
 time([[Config for indent-blankline.nvim]], true)
 try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\21indent_blankline\frequire\0", "config", "indent-blankline.nvim")
 time([[Config for indent-blankline.nvim]], false)
+-- Config for: galaxyline.nvim
+time([[Config for galaxyline.nvim]], true)
+try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22galaxyline-config\frequire\0", "config", "galaxyline.nvim")
+time([[Config for galaxyline.nvim]], false)
+-- Config for: vim-prettier
+time([[Config for vim-prettier]], true)
+try_loadstring("\27LJ\2\nT\0\0\6\0\6\0\t6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0004\5\0\0B\0\5\1K\0\1\0\18:Prettier<CR>\14<Leader>a\6n\bset\vkeymap\bvim\0", "config", "vim-prettier")
+time([[Config for vim-prettier]], false)
+-- Config for: lsp_signature.nvim
+time([[Config for lsp_signature.nvim]], true)
+try_loadstring("\27LJ\2\nO\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\16hint_prefix\5\nsetup\18lsp_signature\frequire\0", "config", "lsp_signature.nvim")
+time([[Config for lsp_signature.nvim]], false)
+-- Config for: nvim-tree.lua
+time([[Config for nvim-tree.lua]], true)
+try_loadstring("\27LJ\2\n0\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\21nvim-tree-config\frequire\0", "config", "nvim-tree.lua")
+time([[Config for nvim-tree.lua]], false)
+-- Config for: diffview.nvim
+time([[Config for diffview.nvim]], true)
+try_loadstring("\27LJ\2\n¶\1\0\0\6\0\v\0\0226\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\3\0009\0\4\0009\0\5\0'\2\6\0'\3\a\0'\4\b\0004\5\0\0B\0\5\0016\0\3\0009\0\4\0009\0\5\0'\2\6\0'\3\t\0'\4\n\0004\5\0\0B\0\5\1K\0\1\0\23:DiffviewClose<CR>\t<F4>\22:DiffviewOpen<CR>\t<F3>\6n\bset\vkeymap\bvim\nsetup\rdiffview\frequire\0", "config", "diffview.nvim")
+time([[Config for diffview.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

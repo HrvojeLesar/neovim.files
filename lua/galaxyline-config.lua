@@ -27,7 +27,7 @@ gls.left[2] = {
     ViMode = {
         provider = function()
             local alias = { n = "NORMAL", i = "INSERT", c = "COMMAND", v = "VISUAL", V = "VISUAL LINE",
-                [""] = "VISUAL BLOCK", s = "SELECT", R = "REPLACE" }
+                [""] = "VISUAL BLOCK", s = "SELECT", R = "REPLACE", t = "TERMINAL" }
             if (alias[vim.fn.mode()] ~= nil) then
                 return alias[vim.fn.mode()] .. " "
             else
