@@ -15,7 +15,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
     buf_set_keymap("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
     buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    buf_set_keymap("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+    -- buf_set_keymap("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
     buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
     buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
@@ -95,7 +95,7 @@ cmp.setup({
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 local lsp_installer = require("nvim-lsp-installer");
 lsp_installer.setup({});
