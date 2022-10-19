@@ -13,6 +13,7 @@ return require("packer").startup(function(use)
                 diagnostics = {
                     undercurl = false
                 },
+                transparent = true,
                 highlights = {
                     LspReferenceText = { bg = palette.dark.bg1 },
                     LspReferenceWrite = { bg = palette.dark.bg1 },
