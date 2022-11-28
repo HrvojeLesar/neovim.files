@@ -9,7 +9,7 @@ return require("packer").startup(function(use)
         config = function()
             local onedark = require("onedark")
             local palette = require("onedark.palette")
-            local transparent = function() 
+            local transparent = function()
                 if vim.fn.has("win32") == 1 then
                     return false
                 else
@@ -33,7 +33,18 @@ return require("packer").startup(function(use)
 
     -- Lsp plugins
     use "neovim/nvim-lspconfig"
-    use "williamboman/nvim-lsp-installer"
+    -- use "williamboman/nvim-lsp-installer"
+    use { "williamboman/mason.nvim",
+        config = function()
+            require("mason").setup()
+        end
+    }
+    use { "williamboman/mason-lspconfig.nvim",
+        config = function()
+            require("mason-lspconfig").setup()
+        end
+    }
+
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-nvim-lsp"
     use "onsails/lspkind-nvim"
@@ -189,12 +200,6 @@ return require("packer").startup(function(use)
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
             require("luatab").setup()
-        end
-    }
-
-    use { "williamboman/mason.nvim",
-        config = function()
-            require("mason").setup()
         end
     }
 

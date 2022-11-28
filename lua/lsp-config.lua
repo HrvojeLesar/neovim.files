@@ -97,17 +97,16 @@ cmp.setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-local lsp_installer = require("nvim-lsp-installer");
-lsp_installer.setup({});
+local mason_lspconfig = require("mason-lspconfig");
 
 local opts = {
     on_attach = on_attach,
     capabilities = capabilities,
 }
 
-for _, server in ipairs(lsp_installer.get_installed_servers()) do
-    if server.name == "sumneko_lua" then
-        require("lspconfig")[server.name].setup({
+for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
+    if server_name == "sumneko_lua" then
+        require("lspconfig")[server_name].setup({
             on_attach = opts.on_attach,
             capabilities = opts.capabilities,
             settings = {
@@ -123,8 +122,8 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
                 },
             },
         })
-    elseif server.name == "texlab" then
-        require("lspconfig")[server.name].setup({
+    elseif server_name == "texlab" then
+        require("lspconfig")[server_name].setup({
             on_attach = opts.on_attach,
             capabilities = opts.capabilities,
             settings = {
@@ -143,25 +142,22 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
                 }
             },
         })
+    elseif server_name == "rust_analyzer" then
+        require("rust-tools").setup({
+            tools = {
+                inlay_hints = {
+                    -- prefix for parameter hints
+                    parameter_hints_prefix = "<- ",
+                    -- prefix for all the other hints (type, chaining)
+                    other_hints_prefix = ">> ",
+                }
+            },
+            server = {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            }
+        })
     else
-        require("lspconfig")[server.name].setup(opts);
+        require("lspconfig")[server_name].setup(opts);
     end
 end
-
-
-
-require("rust-tools").setup({
-    tools = {
-        inlay_hints = {
-            -- prefix for parameter hints
-            parameter_hints_prefix = "<- ",
-
-            -- prefix for all the other hints (type, chaining)
-            other_hints_prefix = ">> ",
-        }
-    },
-    server = {
-        on_attach = on_attach,
-        capabilities = capabilities,
-    }
-})
