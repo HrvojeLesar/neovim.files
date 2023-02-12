@@ -1,5 +1,3 @@
-vim.cmd [[packadd packer.nvim]]
-
 return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
@@ -56,7 +54,7 @@ return require("packer").startup(function(use)
             })
         end
     }
-    use "glepnir/lspsaga.nvim"
+    -- use "glepnir/lspsaga.nvim"
 
     -- Tree sitter
     use {
@@ -194,6 +192,7 @@ return require("packer").startup(function(use)
     }
 
     -- Text highlight
+    -- Extremly slow for large files (might be because of treesitter)
     use "RRethy/vim-illuminate"
     use {
         "alvarosevilla95/luatab.nvim",
