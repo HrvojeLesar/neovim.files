@@ -145,9 +145,41 @@ return require("packer").startup(function(use)
 
     -- Status line
     use {
-        "glepnir/galaxyline.nvim",
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config = function()
-            require("galaxyline-config")
+            local function lsp_status()
+                return require("lsp-status").status()
+            end
+            require("lualine").setup({
+                options = {
+                    theme = "auto",
+                    component_separators = "",
+                    section_separators = "",
+                },
+                sections = {
+                    lualine_a = {"mode"},
+                    lualine_b = {"branch", "diagnostics"},
+                    lualine_c = {
+                    {
+                        "filetype",
+                        colored = true,
+                        icon_only = true,
+                        icon = {
+                            align = "right"
+                        },
+                        padding = { left = 1,  right = 1 }
+                    }, 
+                    {
+                        "filename",
+                        padding = { left = 0 }
+                    }
+                    },
+                    lualine_x = { lsp_status },
+                    lualine_y = {"location"},
+                    lualine_z = {"progress"},
+                }
+            })
         end
     }
     use "nvim-lua/lsp-status.nvim"

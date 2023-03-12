@@ -23,11 +23,7 @@ local function open_nvim_tree(data)
         vim.cmd.cd(data.file)
         -- open the tree
         require("nvim-tree.api").tree.open()
-    else
-        vim.cmd.cd("%:h")
     end
-
-
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
