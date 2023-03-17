@@ -104,6 +104,21 @@ local opts = {
     capabilities = capabilities,
 }
 
+require("rust-tools").setup({
+    tools = {
+        inlay_hints = {
+            -- prefix for parameter hints
+            parameter_hints_prefix = "<- ",
+            -- prefix for all the other hints (type, chaining)
+            other_hints_prefix = ">> ",
+        }
+    },
+    server = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+    }
+})
+
 for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
     if server_name == "sumneko_lua" then
         require("lspconfig")[server_name].setup({
@@ -142,21 +157,21 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
                 }
             },
         })
-    elseif server_name == "rust_analyzer" then
-        require("rust-tools").setup({
-            tools = {
-                inlay_hints = {
-                    -- prefix for parameter hints
-                    parameter_hints_prefix = "<- ",
-                    -- prefix for all the other hints (type, chaining)
-                    other_hints_prefix = ">> ",
-                }
-            },
-            server = {
-                on_attach = on_attach,
-                capabilities = capabilities,
-            }
-        })
+    -- elseif server_name == "rust_analyzer" then
+    --     require("rust-tools").setup({
+    --         tools = {
+    --             inlay_hints = {
+    --                 -- prefix for parameter hints
+    --                 parameter_hints_prefix = "<- ",
+    --                 -- prefix for all the other hints (type, chaining)
+    --                 other_hints_prefix = ">> ",
+    --             }
+    --         },
+    --         server = {
+    --             on_attach = on_attach,
+    --             capabilities = capabilities,
+    --         }
+    --     })
     else
         require("lspconfig")[server_name].setup(opts);
     end
