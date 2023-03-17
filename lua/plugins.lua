@@ -90,10 +90,18 @@ return require("packer").startup(function(use)
         "nvim-telescope/telescope.nvim",
         config = function()
             local telescope = require("telescope")
+            local actions = require("telescope.actions")
             telescope.setup({
                 extensions = {
                     ["ui-select"] = {
                         require("telescope.themes").get_cursor({})
+                    }
+                },
+                defaults = {
+                    mappings = {
+                        n = {
+                            ["dq"] = actions.delete_buffer
+                        },
                     }
                 }
             })
