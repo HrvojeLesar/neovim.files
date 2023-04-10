@@ -12,6 +12,7 @@ local on_attach = function(client, bufnr)
 
     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end)
     vim.keymap.set("n", "gd", function() telescope_builtin.lsp_definitions() end)
+    vim.keymap.set("i", "<C-q>", function() require("lsp_signature").toggle_float_win() end)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end)
     vim.keymap.set("n", "<C-k>", function() vim.lsp.buf.signature_help() end)
     vim.keymap.set("n", "<space>wa", function() vim.lsp.buf.add_workspace_folder() end)
