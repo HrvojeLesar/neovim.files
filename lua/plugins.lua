@@ -31,7 +31,6 @@ return require("packer").startup(function(use)
 
     -- Lsp plugins
     use "neovim/nvim-lspconfig"
-    -- use "williamboman/nvim-lsp-installer"
     use { "williamboman/mason.nvim",
         config = function()
             require("mason").setup()
@@ -60,6 +59,13 @@ return require("packer").startup(function(use)
     use {
         "nvim-treesitter/nvim-treesitter",
         run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                indent = {
+                    enable = true,
+                }
+            })
+        end,
     }
     use 'nvim-treesitter/nvim-treesitter-context'
 

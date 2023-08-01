@@ -12,58 +12,70 @@ buf_set_keymap("n", "<leader>lp",
     '<cmd>lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', opts)
 buf_set_keymap("n", "<leader>dr", '<cmd>lua require("dap").repl.open()<CR>', opts)
 buf_set_keymap("n", "<leader>dl", '<cmd>lua require("dap").repl.run_last()<CR>', opts)
---buf_set_keymap("n", "<leader>dd", "<cmd>lua local widgets=require"dap.ui.widgets"; widgets.centered_float(widgets.scopes)<CR>", opts)
+buf_set_keymap("n", "<leader>dd", '<cmd>lua local widgets=require"dap.ui.widgets"; widgets.centered_float(widgets.scopes)<CR>', opts)
 
 buf_set_keymap("n", "<leader>dd", '<cmd>lua require("dapui").toggle()<CR>', opts)
-
-local function is_dap_installed(installed_packages, dap_server_name)
-    for _, package_name in ipairs(installed_packages) do
-        if dap_server_name == package_name then
-            return true
-        end
-    end
-    return false
-end
 
 local dap = require("dap")
 local registry = require("mason-registry")
 
-local installed_packages = registry.get_installed_package_names()
-
-if is_dap_installed(installed_packages, "delve") then
-    local go_delve = registry.get_package("delve")
-    dap.adapters.delve = {
-        type = "server",
-        port = "${port}",
-        executable = {
-            command = go_delve:get_install_path() .. "/dlv",
-            args = { "dap", "-l", "127.0.0.1:${port}" }
-        }
+dap.adapters.delve = {
+    type = "server",
+    port = "${port}",
+    executable = {
+        command = vim.fn.stdpath("data") .. "/mason/packages/delve/dlv",
+        args = { "dap", "-l", "127.0.0.1:${port}" }
     }
+}
 
-    dap.configurations.go = {
-        {
-            type = "delve",
-            name = "Debug",
-            request = "launch",
-            program = "${file}"
-        },
-        {
-            type = "delve",
-            name = "Debug test",
-            request = "launch",
-            mode = "test",
-            program = "${file}"
-        },
-        {
-            type = "delve",
-            name = "Debug test (go.mod)",
-            request = "launch",
-            mode = "test",
-            program = "./${relativeFileDirname}"
-        }
+dap.configurations.go = {
+    {
+        type = "delve",
+        name = "Debug",
+        request = "launch",
+        program = "${file}"
+    },
+    {
+        type = "delve",
+        name = "Debug test",
+        request = "launch",
+        mode = "test",
+        program = "${file}"
+    },
+    {
+        type = "delve",
+        name = "Debug test (go.mod)",
+        request = "launch",
+        mode = "test",
+        program = "./${relativeFileDirname}"
     }
-end
+}
+
+dap.adapters.php = {
+    type = "executable",
+    command = "node",
+    args = {
+        vim.fn.stdpath("data") .. "/mason/packages/php-debug-adapter/extension/out/phpDebug.js"
+    }
+}
+
+dap.configurations.php = {
+    {
+        name = "Run current script",
+        type = "php",
+        request = "launch",
+        port = 9003,
+        cwd = "${fileDirname}",
+        program = "${file}",
+        runtimeExecutable = "php"
+    },
+    {
+        type = "php",
+        request = "launch",
+        name = "Listen for Xdebug",
+        port = 9003
+    }
+}
 
 dap.set_log_level("DEBUG")
 
