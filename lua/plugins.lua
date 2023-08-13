@@ -33,12 +33,12 @@ return require("packer").startup(function(use)
     use "neovim/nvim-lspconfig"
     use { "williamboman/mason.nvim",
         config = function()
-            require("mason").setup()
+            -- require("mason").setup()
         end
     }
     use { "williamboman/mason-lspconfig.nvim",
         config = function()
-            require("mason-lspconfig").setup()
+            -- require("mason-lspconfig").setup()
         end
     }
 
@@ -247,7 +247,10 @@ return require("packer").startup(function(use)
             require("luatab").setup()
         end
     }
+    use "Hoffs/omnisharp-extended-lsp.nvim"
 
+    require("mason").setup()
+    require("mason-lspconfig").setup()
     require("lsp-config")
     require("dap-config")
     require("nvim-tree-config")

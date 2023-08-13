@@ -10,8 +10,14 @@ lsp_status.register_progress()
 local on_attach = function(client, bufnr)
     local telescope_builtin = require("telescope.builtin")
 
+
+    if vim.o.filetype == "cs" then
+        vim.keymap.set("n", "gd", function() require('omnisharp_extended').telescope_lsp_definitions() end)
+    else
+        vim.keymap.set("n", "gd", function() telescope_builtin.lsp_definitions() end)
+    end
+
     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end)
-    vim.keymap.set("n", "gd", function() telescope_builtin.lsp_definitions() end)
     vim.keymap.set("i", "<C-q>", function() require("lsp_signature").toggle_float_win() end)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end)
     vim.keymap.set("n", "<C-k>", function() vim.lsp.buf.signature_help() end)
@@ -120,9 +126,10 @@ require("rust-tools").setup({
     }
 })
 
+local lsp_config = require("lspconfig")
 for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
     if server_name == "sumneko_lua" then
-        require("lspconfig")[server_name].setup({
+        lsp_config[server_name].setup({
             on_attach = opts.on_attach,
             capabilities = opts.capabilities,
             settings = {
@@ -139,7 +146,7 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
             },
         })
     elseif server_name == "texlab" then
-        require("lspconfig")[server_name].setup({
+        lsp_config[server_name].setup({
             on_attach = opts.on_attach,
             capabilities = opts.capabilities,
             settings = {
@@ -158,6 +165,14 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
                 }
             },
         })
+    elseif server_name == "omnisharp" then
+        lsp_config[server_name].setup({
+            on_attach = opts.on_attach,
+            capabilities = opts.capabilities,
+            handlers = {
+                ["textDocument/definition"] = require('omnisharp_extended').handler,
+            },
+        })
     -- elseif server_name == "rust_analyzer" then
     --     require("rust-tools").setup({
     --         tools = {
@@ -174,6 +189,6 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
     --         }
     --     })
     else
-        require("lspconfig")[server_name].setup(opts);
+        lsp_config[server_name].setup(opts);
     end
 end
