@@ -173,6 +173,19 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
                 ["textDocument/definition"] = require('omnisharp_extended').handler,
             },
         })
+    elseif server_name == "phpactor" then
+        lsp_config[server_name].setup({
+            on_attach = opts.on_attach,
+            capabilities = opts.capabilities,
+            init_options = {
+                ["language_server_phpstan.enabled"] = true,
+                ["language_server_psalm.enabled"] = true,
+                ["language_server_psalm.bin"] = os.getenv("HOME") .. "/.config/composer/vendor/vimeo/psalm/psalm",
+                ["symfony.enabled"] = true,
+                ["language_server_php_cs_fixer.enabled"] = true,
+                ["language_server_php_cs_fixer.bin"] = os.getenv("HOME") .. "/.config/composer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer",
+            }
+        })
     -- elseif server_name == "rust_analyzer" then
     --     require("rust-tools").setup({
     --         tools = {
