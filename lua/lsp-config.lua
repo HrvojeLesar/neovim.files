@@ -179,12 +179,19 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
             capabilities = opts.capabilities,
             init_options = {
                 ["language_server_phpstan.enabled"] = true,
-                ["language_server_psalm.enabled"] = true,
+                ["language_server_phpstan.bin"] = os.getenv("HOME") .. "/.config/composer/vendor/phpstan/phpstan/phpstan",
+                ["language_server_psalm.enabled"] = false,
                 ["language_server_psalm.bin"] = os.getenv("HOME") .. "/.config/composer/vendor/vimeo/psalm/psalm",
                 ["symfony.enabled"] = true,
                 ["language_server_php_cs_fixer.enabled"] = true,
                 ["language_server_php_cs_fixer.bin"] = os.getenv("HOME") .. "/.config/composer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer",
             }
+        })
+    elseif server_name == "html" then
+        lsp_config[server_name].setup({
+            on_attach = opts.on_attach,
+            capabilities = opts.capabilities,
+            filetypes = { 'html', "twig" },
         })
     -- elseif server_name == "rust_analyzer" then
     --     require("rust-tools").setup({
@@ -205,3 +212,25 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
         lsp_config[server_name].setup(opts);
     end
 end
+
+local util = require("lspconfig.util")
+local configs = require("lspconfig.configs")
+configs.twig = {
+    default_config = {
+        cmd = { "node", "/home/hrvoje/twig-language-server/packages/language-server/out/index.js", "--stdio" },
+        filetypes = { 'html', "twig" },
+        root_dir = util.root_pattern('composer.json', '.git'),
+    }
+}
+
+lsp_config["twig"].setup({
+    on_attach = opts.on_attach,
+    capabilities = opts.capabilities,
+    single_file_support = true,
+    settings = {},
+    init_options = {
+        provideFormatter = true,
+        embeddedLanguages = { css = true, javascript = true },
+        configurationSection = { 'html', 'css', 'javascript' },
+    },
+})
