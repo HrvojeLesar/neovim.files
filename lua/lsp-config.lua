@@ -9,7 +9,8 @@ lsp_status.register_progress()
 
 local on_attach = function(client, bufnr)
     local telescope_builtin = require("telescope.builtin")
-
+    local null_ls_sources = require("null-ls.sources").get_available(vim.bo.filetype, "NULL_LS_FORMATTING")
+    local null_ls_formatting_avilable = #null_ls_sources ~= 0
 
     if vim.o.filetype == "cs" then
         vim.keymap.set("n", "gd", function() require('omnisharp_extended').telescope_lsp_definitions() end)
@@ -36,7 +37,22 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "ć", function() vim.diagnostic.goto_prev() end)
     vim.keymap.set("n", "ž", function() vim.diagnostic.goto_next() end)
     vim.keymap.set("n", "<space>q", function() telescope_builtin.diagnostics() end)
-    vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format({ async = true }) end)
+    vim.keymap.set("n", "<space>f", function()
+        vim.lsp.buf.format({
+            async = true,
+            filter = function(format_client)
+                if null_ls_formatting_avilable then
+                    if format_client.name == "null-ls" then
+                        return true
+                    else
+                        return false
+                    end
+                else
+                    return true
+                end
+            end
+        })
+    end)
 
     -- illuminate lsp config
     require("illuminate").on_attach(client)
@@ -185,7 +201,8 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
                 ["language_server_psalm.bin"] = os.getenv("HOME") .. "/.config/composer/vendor/vimeo/psalm/psalm",
                 ["symfony.enabled"] = true,
                 ["language_server_php_cs_fixer.enabled"] = true,
-                ["language_server_php_cs_fixer.bin"] = os.getenv("HOME") .. "/.config/composer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer",
+                ["language_server_php_cs_fixer.bin"] = os.getenv("HOME") ..
+                    "/.config/composer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer",
             }
         })
     elseif server_name == "html" then
@@ -194,21 +211,21 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
             capabilities = opts.capabilities,
             filetypes = { 'html', "twig" },
         })
-    -- elseif server_name == "rust_analyzer" then
-    --     require("rust-tools").setup({
-    --         tools = {
-    --             inlay_hints = {
-    --                 -- prefix for parameter hints
-    --                 parameter_hints_prefix = "<- ",
-    --                 -- prefix for all the other hints (type, chaining)
-    --                 other_hints_prefix = ">> ",
-    --             }
-    --         },
-    --         server = {
-    --             on_attach = on_attach,
-    --             capabilities = capabilities,
-    --         }
-    --     })
+        -- elseif server_name == "rust_analyzer" then
+        --     require("rust-tools").setup({
+        --         tools = {
+        --             inlay_hints = {
+        --                 -- prefix for parameter hints
+        --                 parameter_hints_prefix = "<- ",
+        --                 -- prefix for all the other hints (type, chaining)
+        --                 other_hints_prefix = ">> ",
+        --             }
+        --         },
+        --         server = {
+        --             on_attach = on_attach,
+        --             capabilities = capabilities,
+        --         }
+        --     })
     else
         lsp_config[server_name].setup(opts);
     end
