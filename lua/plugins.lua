@@ -1,8 +1,6 @@
-return require("packer").startup(function(use)
-    use "wbthomason/packer.nvim"
-
+require("lazy").setup({
     -- Themes
-    use {
+    {
         "navarasu/onedark.nvim",
         config = function()
             local onedark = require("onedark")
@@ -27,72 +25,92 @@ return require("packer").startup(function(use)
             })
             onedark.load()
         end,
-    }
+    },
 
     -- Lsp plugins
-    use "neovim/nvim-lspconfig"
-    use { "williamboman/mason.nvim",
+    { 
+        "neovim/nvim-lspconfig",
         config = function()
-            -- require("mason").setup()
+            require("lsp-config")
         end
-    }
-    use { "williamboman/mason-lspconfig.nvim",
+    },
+    { 
+        "williamboman/mason.nvim",
         config = function()
-            -- require("mason-lspconfig").setup()
+            require("mason").setup()
         end
-    }
+    },
+    { 
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            require("mason-lspconfig").setup()
+        end
+    },
 
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-nvim-lsp"
-    use "onsails/lspkind-nvim"
-    use {
+    { "hrsh7th/nvim-cmp" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "onsails/lspkind-nvim" },
+    {
         "ray-x/lsp_signature.nvim",
         config = function()
             require("lsp_signature").setup({
                 hint_prefix = "",
             })
         end
-    }
-    -- use "glepnir/lspsaga.nvim"
+    },
+    -- { "glepnir/lspsaga.nvim" },
 
     -- Tree sitter
-    use {
+    {
         "nvim-treesitter/nvim-treesitter",
-        run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
+        build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({
+                ensure_installed = {
+                    "c",
+                    "lua",
+                    "rust",
+                    "javascript",
+                    "typescript",
+                    "go",
+                },
                 indent = {
                     enable = true,
                 }
             })
         end,
-    }
-    use 'nvim-treesitter/nvim-treesitter-context'
+    },
+    { 'nvim-treesitter/nvim-treesitter-context' },
 
     -- Parenthesis autocomplete
-    use {
+    {
         "windwp/nvim-autopairs",
         config = function()
             require("nvim-autopairs").setup({
                 fast_wrap = {}
             })
         end
-    }
+    },
 
     -- Debugger
-    use "mfussenegger/nvim-dap"
-    use "rcarriga/nvim-dap-ui"
+    { 
+        "mfussenegger/nvim-dap",
+        config = function()
+            require("dap-config")
+        end
+    },
+    { "rcarriga/nvim-dap-ui" },
 
-    use {
+    {
         "mbbill/undotree",
         config = function()
             vim.keymap.set("n", "<F2>", ":UndotreeToggle<CR>", {})
         end
-    }
+    },
 
     -- Telescope
-    use "nvim-lua/plenary.nvim"
-    use {
+    { "nvim-lua/plenary.nvim" },
+    {
         "nvim-telescope/telescope.nvim",
         config = function()
             local telescope = require("telescope")
@@ -122,45 +140,45 @@ return require("packer").startup(function(use)
             vim.keymap.set("n", "<Leader>r", function() builtin.resume() end, {})
             vim.keymap.set("n", "<Leader>fi", function() builtin.current_buffer_fuzzy_find() end, {})
         end
-    }
-    use "nvim-telescope/telescope-ui-select.nvim"
+    },
+    { "nvim-telescope/telescope-ui-select.nvim" },
 
     -- Snippets
-    use "L3MON4D3/LuaSnip"
+    { "L3MON4D3/LuaSnip" },
 
     -- Git
-    use "tpope/vim-fugitive"
-    use "junegunn/gv.vim"
-    use {
+    { "tpope/vim-fugitive" },
+    { "junegunn/gv.vim" },
+    {
         "lewis6991/gitsigns.nvim",
         config = function()
             require("gitsigns").setup()
         end
-    }
-    use {
+    },
+    {
         "sindrets/diffview.nvim",
         config = function()
             require("diffview").setup()
             vim.keymap.set("n", "<F3>", ":DiffviewOpen<CR>", {})
             vim.keymap.set("n", "<F4>", ":DiffviewClose<CR>", {})
         end
-    }
+    },
 
     -- Tree
-    use {
+    {
         "kyazdani42/nvim-tree.lua",
-        requires = {
+        dependencies = {
             "kyazdani42/nvim-web-devicons"
         },
         config = function()
             require("nvim-tree-config")
         end
-    }
+    },
 
     -- Status line
-    use {
+    {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        dependencies = { {'kyazdani42/nvim-web-devicons', lazy = true}, },
         config = function()
             local function lsp_status()
                 return require("lsp-status").status()
@@ -195,10 +213,10 @@ return require("packer").startup(function(use)
                 }
             })
         end
-    }
-    use "nvim-lua/lsp-status.nvim"
+    },
+    { "nvim-lua/lsp-status.nvim" },
 
-    use {
+    {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
             local hooks = require "ibl.hooks"
@@ -214,63 +232,63 @@ return require("packer").startup(function(use)
                 scope = { enabled = false },
             })
         end
-    }
+    },
 
     -- Rust
-    use "simrat39/rust-tools.nvim"
+    { "simrat39/rust-tools.nvim" },
 
     -- Comments
-    use {
+    {
         "numToStr/Comment.nvim",
         config = function()
             require("Comment").setup()
         end
-    }
-    use {
+    },
+    {
         "folke/todo-comments.nvim",
         config = function()
             require("todo-comments").setup()
         end
-    }
+    },
 
     -- Markdown preview
-    use {
+    {
         "iamcco/markdown-preview.nvim",
-        run = "cd app && yarn install"
-    }
+        build = "cd app && yarn install"
+    },
 
     -- Formatting
-    use {
+    {
         "prettier/vim-prettier",
-        run = "npm install --frozen-lockfile --production",
+        build = "npm install --frozen-lockfile --production",
         config = function()
             vim.keymap.set("n", "<Leader>a", ":Prettier<CR>", {})
         end
-    }
+    },
 
     -- Text highlight
     -- Extremly slow for large files (might be because of treesitter)
-    use "RRethy/vim-illuminate"
-    use {
+    { "RRethy/vim-illuminate" },
+    {
         "alvarosevilla95/luatab.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
+        dependencies = { "kyazdani42/nvim-web-devicons" },
         config = function()
             require("luatab").setup()
         end
-    }
-    use "Hoffs/omnisharp-extended-lsp.nvim"
+    },
+    { "Hoffs/omnisharp-extended-lsp.nvim" },
 
-    use {
+    {
         "kristijanhusak/vim-dadbod-completion",
         ft = { "sql", "mysql", "plsql" },
-        requires = {
+        dependencies = {
             "tpope/vim-dadbod",
         },
-    }
+    },
 
-    use {
+    {
         "kristijanhusak/vim-dadbod-ui",
-        requires = {
+        dependencies = {
             "tpope/vim-dadbod",
         },
         cmd = {
@@ -283,15 +301,10 @@ return require("packer").startup(function(use)
             -- Your DBUI configuration
             vim.g.db_ui_use_nerd_fonts = 1
         end,
-    }
+    },
 
-    use {
-        "jrop/mongo.nvim"
-    }
+    { "jrop/mongo.nvim" },
+},
+{
 
-    require("mason").setup()
-    require("mason-lspconfig").setup()
-    require("lsp-config")
-    require("dap-config")
-    require("nvim-tree-config")
-end)
+})
