@@ -260,6 +260,35 @@ return require("packer").startup(function(use)
     }
     use "Hoffs/omnisharp-extended-lsp.nvim"
 
+    use {
+        "kristijanhusak/vim-dadbod-completion",
+        ft = { "sql", "mysql", "plsql" },
+        requires = {
+            "tpope/vim-dadbod",
+        },
+    }
+
+    use {
+        "kristijanhusak/vim-dadbod-ui",
+        requires = {
+            "tpope/vim-dadbod",
+        },
+        cmd = {
+            'DBUI',
+            'DBUIToggle',
+            'DBUIAddConnection',
+            'DBUIFindBuffer',
+        },
+        config = function()
+            -- Your DBUI configuration
+            vim.g.db_ui_use_nerd_fonts = 1
+        end,
+    }
+
+    use {
+        "jrop/mongo.nvim"
+    }
+
     require("mason").setup()
     require("mason-lspconfig").setup()
     require("lsp-config")

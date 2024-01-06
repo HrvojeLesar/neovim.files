@@ -11,6 +11,8 @@ vim.keymap.set("v", "<Leader>y", '"+y', {})
 vim.keymap.set("n", "<Leader>p", '"+p', {})
 vim.keymap.set("v", "<Leader>p", '"+p', {})
 
+vim.keymap.set("n", "<Leader>w", "<C-w>n<C-w>T")
+
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {})
 if vim.fn.has("win32") == 1 then
     vim.keymap.set("n", "<Leader>tt", "<Cmd>split term://powershell<CR>", {})
