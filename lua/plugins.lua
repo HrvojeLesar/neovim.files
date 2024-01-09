@@ -1,4 +1,4 @@
-require("lazy").setup({
+return {
 	-- Themes
 	{
 		"navarasu/onedark.nvim",
@@ -26,14 +26,10 @@ require("lazy").setup({
 			onedark.load()
 		end,
 	},
+	{ "folke/neodev.nvim" },
 
 	-- Lsp plugins
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			require("lsp-config")
-		end,
-	},
+	{ "neovim/nvim-lspconfig" },
 	{
 		"williamboman/mason.nvim",
 		config = function()
@@ -83,6 +79,9 @@ require("lazy").setup({
 				indent = {
 					enable = true,
 				},
+				highlight = {
+					enable = true,
+				},
 			})
 		end,
 	},
@@ -99,13 +98,13 @@ require("lazy").setup({
 	},
 
 	-- Debugger
+	{ "mfussenegger/nvim-dap" },
 	{
-		"mfussenegger/nvim-dap",
+		"rcarriga/nvim-dap-ui",
 		config = function()
-			require("dap-config")
+			require("dapui").setup({})
 		end,
 	},
-	{ "rcarriga/nvim-dap-ui" },
 
 	{
 		"mbbill/undotree",
@@ -136,27 +135,6 @@ require("lazy").setup({
 				},
 			})
 			telescope.load_extension("ui-select")
-
-			local builtin = require("telescope.builtin")
-
-			vim.keymap.set("n", "<Leader>ff", function()
-				builtin.find_files()
-			end, {})
-			vim.keymap.set("n", "<Leader>fg", function()
-				builtin.live_grep()
-			end, {})
-			vim.keymap.set("n", "<Leader>fb", function()
-				builtin.buffers()
-			end, {})
-			vim.keymap.set("n", "<Leader>fh", function()
-				builtin.help_tags()
-			end, {})
-			vim.keymap.set("n", "<Leader>r", function()
-				builtin.resume()
-			end, {})
-			vim.keymap.set("n", "<Leader>fi", function()
-				builtin.current_buffer_fuzzy_find()
-			end, {})
 		end,
 	},
 	{ "nvim-telescope/telescope-ui-select.nvim" },
@@ -177,8 +155,6 @@ require("lazy").setup({
 		"sindrets/diffview.nvim",
 		config = function()
 			require("diffview").setup()
-			vim.keymap.set("n", "<F3>", ":DiffviewOpen<CR>", {})
-			vim.keymap.set("n", "<F4>", ":DiffviewClose<CR>", {})
 		end,
 	},
 
@@ -188,9 +164,6 @@ require("lazy").setup({
 		dependencies = {
 			"kyazdani42/nvim-web-devicons",
 		},
-		config = function()
-			require("nvim-tree-config")
-		end,
 	},
 
 	-- Status line
@@ -275,15 +248,6 @@ require("lazy").setup({
 		build = "cd app && yarn install",
 	},
 
-	-- Formatting
-	{
-		"prettier/vim-prettier",
-		build = "npm install --frozen-lockfile --production",
-		config = function()
-			vim.keymap.set("n", "<Leader>a", ":Prettier<CR>", {})
-		end,
-	},
-
 	-- Text highlight
 	-- Extremly slow for large files (might be because of treesitter)
 	{ "RRethy/vim-illuminate" },
@@ -316,7 +280,6 @@ require("lazy").setup({
 			"DBUIFindBuffer",
 		},
 		config = function()
-			-- Your DBUI configuration
 			vim.g.db_ui_use_nerd_fonts = 1
 		end,
 	},
@@ -330,9 +293,9 @@ require("lazy").setup({
 			null_ls.setup({
 				sources = {
 					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.prettierd
+					null_ls.builtins.formatting.prettierd,
 				},
 			})
 		end,
 	},
-}, {})
+}
