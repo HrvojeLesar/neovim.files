@@ -181,19 +181,7 @@ return {
     },
 
     { "jrop/mongo.nvim" },
-    {
-        "nvimtools/none-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            local null_ls = require("null-ls")
-            null_ls.setup({
-                sources = {
-                    null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.formatting.prettierd,
-                },
-            })
-        end,
-    },
+    { "nvimtools/none-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
@@ -204,6 +192,7 @@ return {
         event = "BufEnter",
         config = function()
             vim.g.codeium_disable_bindings = 1
+            vim.g.codeium_manual = true
 
             vim.keymap.set("i", "<C-g>", function()
                 return vim.fn["codeium#Accept"]()

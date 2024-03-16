@@ -232,3 +232,16 @@ lsp_config["twig"].setup({
         configurationSection = { "html", "css", "javascript" },
     },
 })
+
+local null_ls = require("null-ls")
+null_ls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.prettierd,
+        null_ls.builtins.formatting.sql_formatter.with({
+            extra_args = { "--config", '{"tabWidth": 4, "linesBetweenQueries": 2 }' },
+        }),
+    },
+})
