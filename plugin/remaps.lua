@@ -21,3 +21,6 @@ else
 	vim.keymap.set("n", "<Leader>tt", "<Cmd>split term://bash<CR>", {})
 	vim.keymap.set("n", "<Leader>tv", "<Cmd>vertical split term://bash<CR>", {})
 end
+
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")

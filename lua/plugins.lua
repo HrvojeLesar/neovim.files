@@ -52,6 +52,7 @@ return {
     { "mfussenegger/nvim-dap" },
     {
         "rcarriga/nvim-dap-ui",
+        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
         config = function()
             require("dapui").setup({})
         end,
@@ -192,7 +193,7 @@ return {
         event = "BufEnter",
         config = function()
             vim.g.codeium_disable_bindings = 1
-            vim.g.codeium_manual = true
+            vim.g.codeium_manual = false
 
             vim.keymap.set("i", "<C-g>", function()
                 return vim.fn["codeium#Accept"]()
