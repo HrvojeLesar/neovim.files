@@ -1,12 +1,3 @@
-local lsp_status = require("lsp-status")
-lsp_status.config({
-	status_symbol = "",
-	diagnostics = false,
-	current_function = false,
-	update_interval = 500,
-})
-lsp_status.register_progress()
-
 local on_attach = function(client, bufnr)
 	local telescope_builtin = require("telescope.builtin")
 
@@ -94,8 +85,6 @@ local on_attach = function(client, bufnr)
 
 	-- illuminate lsp config
 	require("illuminate").on_attach(client)
-
-	lsp_status.on_attach(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -103,7 +92,10 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 local mason_lspconfig = require("mason-lspconfig")
 
-require("rust-tools").setup({
+-- inlay hints
+vim.lsp.inlay_hint.enable(true)
+
+vim.g.rustaceanvim = {
 	tools = {
 		inlay_hints = {
 			-- prefix for parameter hints
@@ -116,7 +108,7 @@ require("rust-tools").setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
 	},
-})
+}
 
 require("neodev").setup({
 	library = {

@@ -1,7 +1,3 @@
-local function lsp_status()
-    return require("lsp-status").status()
-end
-
 local function codeium_status()
     return vim.api.nvim_call_function("codeium#GetStatusString", {})
 end
@@ -30,7 +26,7 @@ require("lualine").setup({
                 padding = { left = 0 },
             },
         },
-        lualine_x = { lsp_status, codeium_status },
+        lualine_x = { codeium_status },
         lualine_y = { "location" },
         lualine_z = { "progress" },
     },
