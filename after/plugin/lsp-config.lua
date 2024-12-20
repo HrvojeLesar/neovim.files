@@ -20,9 +20,9 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "K", function()
         vim.lsp.buf.hover()
     end)
-    -- vim.keymap.set("n", "<C-k>", function()
-    -- 	vim.lsp.buf.signature_help()
-    -- end)
+    vim.keymap.set("n", "<C-k>", function()
+    	vim.lsp.buf.signature_help()
+    end)
     vim.keymap.set("n", "<space>wa", function()
         vim.lsp.buf.add_workspace_folder()
     end)
@@ -88,7 +88,8 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+
 vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" })
 
 local mason_lspconfig = require("mason-lspconfig")

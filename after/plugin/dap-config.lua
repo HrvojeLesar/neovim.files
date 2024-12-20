@@ -25,6 +25,16 @@ vim.keymap.set({ "n", "v" }, "<leader>k", function()
     dapui.float_element("scopes", { enter = true })
 end, opts)
 
+vim.keymap.set('n', '<leader>dw', function()
+    local widgets = require "dap.ui.widgets"
+    widgets.hover()
+end)
+
+vim.keymap.set('n', '<leader>df', function()
+    local widgets = require "dap.ui.widgets"
+    widgets.centered_float(widgets.frames)
+end)
+
 dap.adapters.delve = {
     type = "server",
     port = "${port}",
@@ -91,3 +101,7 @@ dap.configurations.php = {
         port = 9003,
     },
 }
+
+dap.adapters.nlua = function(callback, config)
+    callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
+end
