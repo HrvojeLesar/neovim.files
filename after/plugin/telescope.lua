@@ -22,7 +22,7 @@ if builtin then
         builtin.find_files()
     end, {})
     vim.keymap.set("n", "<Leader>fg", function()
-        builtin.live_grep()
+        require("custom.telescope-grep").grep()
     end, {})
     vim.keymap.set("n", "<Leader>fb", function()
         builtin.buffers()
