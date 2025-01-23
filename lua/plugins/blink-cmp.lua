@@ -7,7 +7,6 @@ return {
         opts = {
             keymap = {
                 preset = 'default',
-                ['<C-k>'] = { 'show', 'show_documentation', 'hide_documentation' },
                 ['<CR>'] = { 'accept', 'fallback' },
             },
 
@@ -25,6 +24,14 @@ return {
                 cmdline = {}
             }
         },
+        init = function()
+            vim.keymap.set('i', '<C-k>', function()
+                require('blink.cmp').show()
+                require('blink.cmp').hide()
+                require('blink.cmp').show_documentation()
+                require('blink.cmp').hide_documentation()
+            end, { silent = false });
+        end,
         opts_extend = { "sources.default" }
     },
 }
