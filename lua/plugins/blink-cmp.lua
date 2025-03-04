@@ -20,8 +20,9 @@ return {
                     auto_show = true,
                 },
             },
-            sources = {
-                cmdline = {}
+            cmdline =  {
+                sources = {
+                }
             }
         },
         init = function()
