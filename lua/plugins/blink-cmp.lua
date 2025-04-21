@@ -21,8 +21,7 @@ return {
                 },
             },
             cmdline =  {
-                sources = {
-                }
+                enabled = false,
             }
         },
         init = function()
