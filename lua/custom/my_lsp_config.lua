@@ -77,7 +77,7 @@ local on_attach = function(client, bufnr)
         vim.lsp.buf.format({
             async = true,
             filter = function(format_client)
-                if format_client.name == "tsserver" then
+                if format_client.name == "ts_ls" then
                     return false
                 end
                 return true

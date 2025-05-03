@@ -1,37 +1,43 @@
 return {
-    {
-        'saghen/blink.cmp',
-        dependencies = 'rafamadriz/friendly-snippets',
-        version = 'v0.*',
+	{
+		"saghen/blink.cmp",
+		dependencies = "rafamadriz/friendly-snippets",
 
-        opts = {
-            keymap = {
-                preset = 'default',
-                ['<CR>'] = { 'accept', 'fallback' },
-            },
+		opts = {
+			keymap = {
+				["<CR>"] = { "accept", "fallback" },
+				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				["<C-e>"] = { "hide" },
+				["<C-y>"] = { "select_and_accept" },
 
-            appearance = {
-                use_nvim_cmp_as_default = true,
-            },
+				["<Up>"] = { "select_prev", "fallback" },
+				["<Down>"] = { "select_next", "fallback" },
+				["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+				["<C-n>"] = { "select_next", "fallback_to_mappings" },
 
-            signature = { enabled = true },
-            completion = {
-                documentation = {
-                    auto_show = true,
-                },
-            },
-            cmdline =  {
-                enabled = false,
-            }
-        },
-        init = function()
-            vim.keymap.set('i', '<C-k>', function()
-                require('blink.cmp').show()
-                require('blink.cmp').hide()
-                require('blink.cmp').show_documentation()
-                require('blink.cmp').hide_documentation()
-            end, { silent = false });
-        end,
-        opts_extend = { "sources.default" }
-    },
+				["<C-b>"] = { "scroll_documentation_up", "fallback" },
+				["<C-f>"] = { "scroll_documentation_down", "fallback" },
+
+				["<Tab>"] = { "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "snippet_backward", "fallback" },
+
+				["<C-k>"] = { "show", "hide", "show_documentation", "hide_documentation", "fallback" },
+			},
+
+			appearance = {
+				use_nvim_cmp_as_default = true,
+			},
+
+			signature = { enabled = true },
+			completion = {
+				documentation = {
+					auto_show = true,
+				},
+			},
+			cmdline = {
+				enabled = false,
+			},
+		},
+		opts_extend = { "sources.default" },
+	},
 }
