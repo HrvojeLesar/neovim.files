@@ -1,7 +1,11 @@
 local M = {}
 
+local custom_code_actions = require("custom.custom_code_actions")
+
 local on_attach = function(client, bufnr)
     local telescope_builtin = require("telescope.builtin")
+
+    custom_code_actions.attach_typescript_remove_unused(client)
 
     if vim.o.filetype == "cs" then
         vim.keymap.set("n", "gd", function()
