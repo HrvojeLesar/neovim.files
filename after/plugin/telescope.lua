@@ -19,7 +19,7 @@ telescope.load_extension("ui-select")
 local builtin = require("telescope.builtin")
 if builtin then
     vim.keymap.set("n", "<Leader>ff", function()
-        builtin.find_files()
+        builtin.find_files({ follow = true })
     end, {})
     vim.keymap.set("n", "<Leader>fg", function()
         require("custom.telescope-grep").grep()

@@ -29,7 +29,7 @@ local function grep(opts)
 
             return vim.iter({
                 args,
-                { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+                { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "-L" },
             }):flatten():totable()
         end,
         entry_maker = make_entry.gen_from_vimgrep(opts),
