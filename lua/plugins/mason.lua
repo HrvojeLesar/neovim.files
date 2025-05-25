@@ -1,14 +1,20 @@
 return {
     {
-        "williamboman/mason.nvim",
+        "meson-org/mason.nvim",
         config = function()
             require("mason").setup()
         end,
     },
     {
-        "williamboman/mason-lspconfig.nvim",
+        "meson-org/mason-lspconfig.nvim",
+        dependencies = {
+            { "mason-org/mason.nvim", opts = {} },
+            "neovim/nvim-lspconfig",
+        },
         config = function()
-            require("mason-lspconfig").setup()
+            require("mason-lspconfig").setup({
+                automatic_enable = false,
+            })
         end,
     },
 }
