@@ -96,7 +96,7 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" })
 
@@ -120,10 +120,9 @@ vim.g.rustaceanvim = {
     },
 }
 
-local lsp_config = require("lspconfig")
 for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
     if server_name == "lua_ls" then
-        lsp_config[server_name].setup({
+        vim.lsp.config(server_name, {
             on_attach = on_attach,
             capabilities = capabilities,
             settings = {
@@ -135,7 +134,7 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
             },
         })
     elseif server_name == "texlab" then
-        lsp_config[server_name].setup({
+        vim.lsp.config(server_name, {
             on_attach = on_attach,
             capabilities = capabilities,
             settings = {
@@ -155,7 +154,7 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
             },
         })
     elseif server_name == "omnisharp" then
-        lsp_config[server_name].setup({
+        vim.lsp.config(server_name, {
             on_attach = on_attach,
             capabilities = capabilities,
             handlers = {
@@ -163,7 +162,7 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
             },
         })
     elseif server_name == "phpactor" then
-        lsp_config[server_name].setup({
+        vim.lsp.config(server_name, {
             on_attach = on_attach,
             capabilities = capabilities,
             init_options = {
@@ -176,7 +175,7 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
             },
         })
     elseif server_name == "html" then
-        lsp_config[server_name].setup({
+        vim.lsp.config(server_name, {
             on_attach = on_attach,
             capabilities = capabilities,
             filetypes = { "html", "twig" },
@@ -198,39 +197,41 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
         --     })
     elseif server_name == "jdtls" then
     else
-        lsp_config[server_name].setup({
+        vim.lsp.config(server_name, {
             on_attach = on_attach,
             capabilities = capabilities,
         })
     end
+
+    vim.lsp.enable(server_name)
 end
 
-local util = require("lspconfig.util")
-local configs = require("lspconfig.configs")
-configs.twig = {
-    default_config = {
-        cmd = { "node", "/home/hrvoje/twig-language-server/packages/language-server/out/index.js", "--stdio" },
-        filetypes = { "html", "twig" },
-        root_dir = util.root_pattern("composer.json", ".git"),
-    },
-}
-
-lsp_config["twig"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    single_file_support = true,
-    settings = {},
-    init_options = {
-        provideFormatter = true,
-        embeddedLanguages = { css = true, javascript = true },
-        configurationSection = { "html", "css", "javascript" },
-    },
-})
+-- local util = require("lspconfig.util")
+-- local configs = require("lspconfig.configs")
+-- configs.twig = {
+--     default_config = {
+--         cmd = { "node", "/home/hrvoje/twig-language-server/packages/language-server/out/index.js", "--stdio" },
+--         filetypes = { "html", "twig" },
+--         root_dir = util.root_pattern("composer.json", ".git"),
+--     },
+-- }
+--
+-- vim.lsp.config("twig", {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     single_file_support = true,
+--     settings = {},
+--     init_options = {
+--         provideFormatter = true,
+--         embeddedLanguages = { css = true, javascript = true },
+--         configurationSection = { "html", "css", "javascript" },
+--     },
+-- })
 
 local null_ls = require("null-ls")
 local markdownlint_config_path = vim.fn.stdpath("config") .. "/extra/markdownlint_config.json"
 local function sqlfluff_extra_args()
-    local root_dir = vim.fs.root(0, '.sqlfluff')
+    local root_dir = vim.fs.root(0, ".sqlfluff")
     if root_dir == nil then
         return {}
     end
