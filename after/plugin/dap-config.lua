@@ -114,3 +114,51 @@ dap.adapters.codelldb = {
         args = { "--port", "${port}" },
     },
 }
+
+dap.configurations.cpp = {
+    {
+        name = "Launch current file (codelldb)",
+        type = "codelldb",
+        request = "launch",
+        program = function()
+            -- Compile the current file with clang++ and debug symbols
+            local filename = vim.fn.expand("%:p:r") -- full path without extension
+            local source = vim.fn.expand("%:p")
+            local binary = filename
+
+            -- You can tweak flags here (C++20, warnings, etc.)
+            local compile_cmd = string.format(
+                "clang++ -std=c++23 -g -O0 -Wall -Wextra -o %s %s",
+                vim.fn.shellescape(binary),
+                vim.fn.shellescape(source)
+            )
+
+            print("Compiling: " .. compile_cmd)
+            local result = os.execute(compile_cmd)
+
+            if vim.v.shell_error ~= 0 then
+                vim.notify("Compilation failed!", vim.log.levels.ERROR)
+                return nil
+            end
+
+            return binary
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+        runInTerminal = false,
+
+        -- Optional: pretty-print STL with lldb
+        setupCommands = {
+            {
+                text = "settings set target.input-fd 0",
+                description = "redirect stdin",
+                ignoreFailures = false,
+            },
+            {
+                text = "settings set target.output-fd 1",
+                description = "redirect stdout",
+                ignoreFailures = false,
+            },
+        },
+    },
+}
