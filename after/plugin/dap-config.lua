@@ -115,34 +115,69 @@ dap.adapters.codelldb = {
     },
 }
 
+local function compile_cpp_23()
+    local extra_flags = ''
+    vim.ui.input({
+        prompt = "Extra clang++ flags: ",
+    }, function(input)
+        if input ~= nil then
+            extra_flags = input
+        end
+    end)
+
+    -- Compile the current file with clang++ and debug symbols
+    local filename = vim.fn.expand("%:p:r") -- full path without extension
+    local source = vim.fn.expand("%:p")
+    local binary = filename
+
+    -- You can tweak flags here (C++20, warnings, etc.)
+    local compile_cmd = string.format(
+        "clang++ -std=c++23 -g -O0 %s -o %s %s",
+        extra_flags,
+        vim.fn.shellescape(binary),
+        vim.fn.shellescape(source)
+    )
+
+    print("Compiling: " .. compile_cmd)
+    local result = os.execute(compile_cmd)
+
+    if vim.v.shell_error ~= 0 then
+        vim.notify("Compilation failed!", vim.log.levels.ERROR)
+        return nil
+    end
+
+    return binary
+end
+
 dap.configurations.cpp = {
     {
-        name = "Launch current file (codelldb)",
+        name = "Launch current file (codelldb) cwd: fileDirname",
         type = "codelldb",
         request = "launch",
-        program = function()
-            -- Compile the current file with clang++ and debug symbols
-            local filename = vim.fn.expand("%:p:r") -- full path without extension
-            local source = vim.fn.expand("%:p")
-            local binary = filename
+        program = compile_cpp_23,
+        cwd = "${fileDirname}",
+        stopOnEntry = false,
+        runInTerminal = false,
 
-            -- You can tweak flags here (C++20, warnings, etc.)
-            local compile_cmd = string.format(
-                "clang++ -std=c++23 -g -O0 -Wall -Wextra -o %s %s",
-                vim.fn.shellescape(binary),
-                vim.fn.shellescape(source)
-            )
-
-            print("Compiling: " .. compile_cmd)
-            local result = os.execute(compile_cmd)
-
-            if vim.v.shell_error ~= 0 then
-                vim.notify("Compilation failed!", vim.log.levels.ERROR)
-                return nil
-            end
-
-            return binary
-        end,
+        -- Optional: pretty-print STL with lldb
+        setupCommands = {
+            {
+                text = "settings set target.input-fd 0",
+                description = "redirect stdin",
+                ignoreFailures = false,
+            },
+            {
+                text = "settings set target.output-fd 1",
+                description = "redirect stdout",
+                ignoreFailures = false,
+            },
+        },
+    },
+    {
+        name = "Launch current file (codelldb) cwd: workspaceFolder",
+        type = "codelldb",
+        request = "launch",
+        program = compile_cpp_23,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
         runInTerminal = false,
