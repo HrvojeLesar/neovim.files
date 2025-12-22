@@ -84,6 +84,12 @@ local function on_attach(bufnr)
 	--
 	-- You will need to insert "your code goes here" for any mappings with a custom action_cb
 	vim.keymap.set("n", "<C-c>", api.tree.change_root_to_node, opts("CD"))
+
+	vim.keymap.set("n", "A", function()
+		local node = api.tree.get_node_under_cursor()
+		local path = node.type == "directory" and node.absolute_path or vim.fs.dirname(node.absolute_path)
+		require("easy-dotnet").create_new_item(path)
+	end, opts("Create file from dotnet template"))
 end
 
 local nvim_tree = require("nvim-tree")
