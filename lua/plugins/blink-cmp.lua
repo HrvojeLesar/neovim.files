@@ -39,16 +39,17 @@ return {
 				enabled = false,
 			},
 			sources = {
-				default = { "lsp", "path", "easy-dotnet", "snippets", "buffer" },
-				providers = {
-					["easy-dotnet"] = {
-						name = "easy-dotnet",
-						enabled = true,
-						module = "easy-dotnet.completion.blink",
-						score_offset = 10000,
-						async = true,
-					},
-				},
+				default = { "lsp", "path", "snippets", "buffer" },
+				-- default = { "lsp", "path", "easy-dotnet", "snippets", "buffer" },
+				-- providers = {
+				-- 	["easy-dotnet"] = {
+				-- 		name = "easy-dotnet",
+				-- 		enabled = true,
+				-- 		module = "easy-dotnet.completion.blink",
+				-- 		score_offset = 10000,
+				-- 		async = true,
+				-- 	},
+				-- },
 			},
 		},
 		opts_extend = { "sources.default" },

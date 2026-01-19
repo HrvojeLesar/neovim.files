@@ -1,5 +1,6 @@
 local dap = require("dap")
 local dapui = require("dapui")
+local widgets = require("dap.ui.widgets")
 
 local opts = { noremap = true, silent = true }
 
@@ -103,7 +104,7 @@ dap.configurations.php = {
 }
 
 dap.adapters.nlua = function(callback, config)
-    callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
+    callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
 end
 
 dap.adapters.codelldb = {
@@ -116,7 +117,7 @@ dap.adapters.codelldb = {
 }
 
 local function compile_cpp_23()
-    local extra_flags = ''
+    local extra_flags = ""
     vim.ui.input({
         prompt = "Extra clang++ flags: ",
     }, function(input)
