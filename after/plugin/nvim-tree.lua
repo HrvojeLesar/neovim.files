@@ -115,5 +115,5 @@ if nvim_tree then
 	vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 	vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", {})
-	vim.api.nvim_set_keymap("n", "<Leader>n", ":NvimTreeFindFile<CR>", {})
+	vim.api.nvim_set_keymap("n", "<Leader>m", ":NvimTreeFindFile<CR>", {})
 end
