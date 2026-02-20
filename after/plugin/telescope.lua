@@ -5,16 +5,28 @@ telescope.setup({
         ["ui-select"] = {
             require("telescope.themes").get_cursor({}),
         },
+        smart_history = {}
     },
     defaults = {
+        history = {
+            path = vim.fn.stdpath("data") .. "/databases/telescope_history.sqlite3",
+            limit = 100,
+        },
         mappings = {
             n = {
                 ["dq"] = actions.delete_buffer,
             },
+            i = {
+                -- Another example using Ctrl-j and Ctrl-k
+                ["<C-j>"] = actions.cycle_history_prev,
+                ["<C-k>"] = actions.cycle_history_next
+            },
         },
     },
 })
+
 telescope.load_extension("ui-select")
+telescope.load_extension('smart_history')
 
 local builtin = require("telescope.builtin")
 if builtin then
@@ -35,5 +47,8 @@ if builtin then
     end, {})
     vim.keymap.set("n", "<Leader>fi", function()
         builtin.current_buffer_fuzzy_find()
+    end, {})
+    vim.keymap.set("n", "<Leader>th", function()
+        require("custom.telescope-search-history").search_history_picker()
     end, {})
 end
