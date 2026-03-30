@@ -28,3 +28,5 @@ vim.diagnostic.config({
 	underline = true,
 	update_in_insert = true,
 })
+
+vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level

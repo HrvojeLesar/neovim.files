@@ -83,7 +83,7 @@ local function on_attach(bufnr)
 	-- Mappings migrated from view.mappings.list
 	--
 	-- You will need to insert "your code goes here" for any mappings with a custom action_cb
-	vim.keymap.set("n", "<C-c>", api.tree.change_root_to_node, opts("CD"))
+	-- vim.keymap.set("n", "<C-c>", api.tree.change_root_to_node, opts("CD"))
 
 	vim.keymap.set("n", "A", function()
 		local node = api.tree.get_node_under_cursor()
@@ -96,6 +96,9 @@ local nvim_tree = require("nvim-tree")
 if nvim_tree then
 	nvim_tree.setup({
 		on_attach = on_attach,
+		view = {
+			width = 40,
+		},
 	})
 
 	local function open_nvim_tree(data)
