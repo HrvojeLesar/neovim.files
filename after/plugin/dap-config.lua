@@ -54,6 +54,13 @@ dap.configurations.go = {
 	},
 	{
 		type = "delve",
+		name = "Debug (Package Dir)",
+		request = "launch",
+		program = "./${relativeFileDirname}",
+		cwd = "${workspaceFolder}",
+	},
+	{
+		type = "delve",
 		name = "Debug test",
 		request = "launch",
 		mode = "test",
