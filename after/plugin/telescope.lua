@@ -26,7 +26,7 @@ telescope.setup({
 })
 
 telescope.load_extension("ui-select")
-telescope.load_extension('smart_history')
+-- telescope.load_extension('smart_history')
 
 local builtin = require("telescope.builtin")
 if builtin then

@@ -1,13 +1,11 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		version = "0.10.0",
-		branch = "master",
 		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = {
+            require("nvim-treesitter").setup({})
+            require("nvim-treesitter").install({
 					"c",
 					"lua",
 					"rust",
@@ -20,14 +18,7 @@ return {
 					"tsx",
 					"vimdoc",
 					"json",
-				},
-				indent = {
-					enable = true,
-				},
-				highlight = {
-					enable = true,
-				},
-			})
+            })
 		end,
 	},
 	{ "nvim-treesitter/nvim-treesitter-context" },
