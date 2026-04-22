@@ -8,6 +8,7 @@ local M = {}
 local function grep(opts)
 	opts = opts or {}
 	opts.cwd = opts.cwd or vim.uv.cwd()
+	opts.no_ignore = opts.no_ignore or false
 
 	local finder = finders.new_async_job({
 		command_generator = function(prompt)
@@ -27,6 +28,10 @@ local function grep(opts)
 				table.insert(args, pieces[2])
 			end
 
+			if opts.no_ignore == true then
+				table.insert(args, "--no-ignore")
+			end
+
 			return vim.iter({
 				args,
 				{
@@ -36,6 +41,8 @@ local function grep(opts)
 					"--line-number",
 					"--column",
 					"--smart-case",
+					"--hidden",
+                    "--glob=!.git",
 					"-L",
 				},
 			})
@@ -46,10 +53,15 @@ local function grep(opts)
 		cwd = opts.cwd,
 	})
 
+    local title = "ripgrep"
+    if opts.no_ignore == true then
+        title = title .. " - no ignore"
+    end
+
 	pickers
 		.new(opts, {
 			debounce = 100,
-			prompt_title = "ripgrep",
+			prompt_title = title,
 			finder = finder,
 			previewer = conf.grep_previewer(opts),
 			sorter = require("telescope.sorters").empty(),
