@@ -1,4 +1,4 @@
-table.unpack = table.unpack or unpack
+-- table.unpack = table.unpack or unpack
 
 vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" })
 
