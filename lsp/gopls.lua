@@ -1,18 +1,29 @@
 ---@type vim.lsp.Config
 local settings = {
-    settings = {
-        gopls = {}
-    }
+	settings = {
+		gopls = {
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				compositeLiteralTypes = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				ignoredError = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
+		},
+	},
+	on_attach = function(_, bufnr)
+		vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+	end,
 }
 
 local cwd = vim.fn.getcwd()
-local build_flags = {}
-
 if cwd:match("feedfinder2") then
-    build_flags = { "-tags=integration" }
-    settings.settings.gopls = {
-        buildFlags = build_flags
-    }
+	settings.settings.gopls.buildFlags = {
+		"-tags=integration",
+	}
 end
 
 return settings
